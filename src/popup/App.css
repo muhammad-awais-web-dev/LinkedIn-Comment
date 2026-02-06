@@ -859,3 +859,42 @@ input::placeholder {
 .panel {
   animation: fadeIn .25s var(--ease);
 }
+
+/* ── Footer social links ───────────────────────────────────── */
+.app-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+}
+
+.footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+  transition: all var(--transition);
+}
+
+.footer-link:hover {
+  color: var(--accent);
+  background: var(--accent-subtle);
+}
+
+.footer-link svg {
+  flex-shrink: 0;
+}
+
+.footer-divider {
+  color: var(--border-color);
+  font-size: 12px;
+  user-select: none;
+}

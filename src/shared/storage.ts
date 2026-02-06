@@ -10,6 +10,7 @@ import type {
   ProviderId,
   UserSettings,
   Platform,
+  ToneOption,
 } from './types';
 import { DEFAULT_TEMPLATES } from './defaultTemplates';
 
@@ -21,6 +22,9 @@ const DEFAULT_SETTINGS: UserSettings = {
 
 const DEFAULT_PROVIDER_CONFIGS: Record<ProviderId, ProviderConfig> = {
   gemini: { apiKey: '', model: 'gemini-2.0-flash' },
+  openai: { apiKey: '', model: 'gpt-4o-mini' },
+  anthropic: { apiKey: '', model: 'claude-sonnet-4-20250514' },
+  groq: { apiKey: '', model: 'llama-3.3-70b-versatile' },
   openrouter: { apiKey: '', model: 'google/gemini-2.0-flash-001' },
 };
 
@@ -95,4 +99,14 @@ export async function getSettings(): Promise<UserSettings> {
 
 export async function saveSettings(settings: UserSettings): Promise<void> {
   await set('settings', settings);
+}
+
+// ── Custom Tones ──────────────────────────────────────────────
+export async function getCustomTones(): Promise<ToneOption[]> {
+  const stored = await get('customTones');
+  return stored ?? [];
+}
+
+export async function saveCustomTones(tones: ToneOption[]): Promise<void> {
+  await set('customTones', tones);
 }
