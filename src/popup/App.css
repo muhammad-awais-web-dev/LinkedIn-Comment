@@ -1,0 +1,598 @@
+/* ═══════════════════════════════════════════════════════════════
+   AI Comment Generator — Popup Stylesheet
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Reset & base ──────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --primary-light: #a5b4fc;
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-hover: #f1f5f9;
+  --text: #1e293b;
+  --text-secondary: #64748b;
+  --border: #e2e8f0;
+  --border-focus: #6366f1;
+  --success: #10b981;
+  --success-bg: #ecfdf5;
+  --error: #ef4444;
+  --error-bg: #fef2f2;
+  --radius: 10px;
+  --radius-sm: 6px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.08);
+  --transition: .15s ease;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+body {
+  font-family: var(--font);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── App container ─────────────────────────────────────────── */
+.app {
+  width: 400px;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Header ────────────────────────────────────────────────── */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: #fff;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.app-header h1 {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.header-right {
+  display: flex;
+  gap: 4px;
+}
+
+.icon-btn {
+  background: rgba(255,255,255,.15);
+  border: none;
+  border-radius: var(--radius-sm);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background var(--transition);
+}
+
+.icon-btn:hover {
+  background: rgba(255,255,255,.28);
+}
+
+.icon-btn.active {
+  background: rgba(255,255,255,.35);
+}
+
+/* ── Main view ─────────────────────────────────────────────── */
+.main-view {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px 16px 18px;
+}
+
+/* ── Platform badge ────────────────────────────────────────── */
+.platform-badge {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--primary-dark);
+  background: #eef2ff;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+/* ── Form labels ───────────────────────────────────────────── */
+.field-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+/* ── Textareas ─────────────────────────────────────────────── */
+textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font-family: var(--font);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text);
+  background: var(--surface);
+  resize: vertical;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+}
+
+textarea:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(99,102,241,.12);
+}
+
+textarea::placeholder {
+  color: var(--text-secondary);
+}
+
+/* ── Select dropdowns ──────────────────────────────────────── */
+select {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 30px 8px 10px;
+  font-family: var(--font);
+  font-size: 13px;
+  color: var(--text);
+  background: var(--surface);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%2364748b' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  cursor: pointer;
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+select:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(99,102,241,.12);
+}
+
+/* ── Controls grid (template + tone side by side) ──────────── */
+.controls-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* ── Provider row ──────────────────────────────────────────── */
+.provider-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.provider-row .field-group {
+  flex: 1;
+}
+
+.provider-row .key-hint {
+  font-size: 11px;
+  color: var(--error);
+  cursor: pointer;
+  white-space: nowrap;
+  padding-bottom: 9px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.provider-row .key-ok {
+  font-size: 11px;
+  color: var(--success);
+  white-space: nowrap;
+  padding-bottom: 9px;
+}
+
+/* ── Generate button ───────────────────────────────────────── */
+.generate-btn {
+  width: 100%;
+  padding: 11px 16px;
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: opacity var(--transition), transform var(--transition);
+  box-shadow: 0 2px 8px rgba(99,102,241,.3);
+}
+
+.generate-btn:hover:not(:disabled) {
+  opacity: 0.92;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(99,102,241,.35);
+}
+
+.generate-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.generate-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Spinner */
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin .6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Error box ─────────────────────────────────────────────── */
+.error-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--error-bg);
+  border: 1px solid #fecaca;
+}
+
+.error-box span {
+  flex-shrink: 0;
+  font-size: 14px;
+}
+
+.error-box p {
+  font-size: 12px;
+  color: var(--error);
+  line-height: 1.45;
+  word-break: break-word;
+}
+
+/* ── Output area ───────────────────────────────────────────── */
+.output-area {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.output-area .output-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: #f0fdf4;
+  border-bottom: 1px solid #bbf7d0;
+}
+
+.output-area .output-header span {
+  font-size: 12px;
+  font-weight: 600;
+  color: #166534;
+}
+
+.output-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.output-actions button {
+  padding: 4px 10px;
+  border: 1px solid #bbf7d0;
+  border-radius: var(--radius-sm);
+  background: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  color: #166534;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.output-actions button:hover {
+  background: #dcfce7;
+}
+
+.output-actions button.copied {
+  background: var(--success);
+  color: #fff;
+  border-color: var(--success);
+}
+
+.output-area textarea {
+  border: none;
+  border-radius: 0;
+  padding: 12px;
+  min-height: 80px;
+}
+
+.output-area textarea:focus {
+  box-shadow: none;
+}
+
+/* ── Settings panel ────────────────────────────────────────── */
+.panel {
+  padding: 14px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.panel-header h2 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.panel-close {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  line-height: 1;
+  padding: 2px 4px;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition);
+}
+
+.panel-close:hover {
+  background: var(--surface-hover);
+}
+
+.panel-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.panel-section h3 {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* ── Input fields ──────────────────────────────────────────── */
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  font-family: var(--font);
+  font-size: 13px;
+  color: var(--text);
+  background: var(--surface);
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(99,102,241,.12);
+}
+
+/* ── Template manager ──────────────────────────────────────── */
+.template-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.template-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--transition);
+}
+
+.template-item:hover {
+  border-color: var(--primary-light);
+}
+
+.template-item .tpl-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.template-item .tpl-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.template-item .tpl-desc {
+  font-size: 11px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.template-item .tpl-actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.template-item .tpl-actions button {
+  background: none;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition);
+}
+
+.template-item .tpl-actions button:hover {
+  background: var(--surface-hover);
+}
+
+/* ── Template edit form ────────────────────────────────────── */
+.template-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: var(--radius-sm);
+}
+
+.template-form .form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.template-form .btn-row {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+/* ── Small buttons ─────────────────────────────────────────── */
+.btn-sm {
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.btn-sm:hover {
+  background: var(--surface-hover);
+}
+
+.btn-sm.primary {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.btn-sm.primary:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+}
+
+.btn-sm.danger {
+  color: var(--error);
+  border-color: #fecaca;
+}
+
+.btn-sm.danger:hover {
+  background: var(--error-bg);
+}
+
+/* ── Add template button ───────────────────────────────────── */
+.add-tpl-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition);
+}
+
+.add-tpl-btn:hover {
+  border-color: var(--primary-light);
+  color: var(--primary);
+}
+
+/* ── Save bar (settings) ───────────────────────────────────── */
+.save-bar {
+  padding-top: 4px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ── Scrollable container ──────────────────────────────────── */
+.scrollable {
+  max-height: 480px;
+  overflow-y: auto;
+}
+
+/* ── Animations ────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.main-view,
+.panel {
+  animation: fadeIn .18s ease;
+}

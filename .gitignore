@@ -1,0 +1,6 @@
+node_modules/
+dist/
+*.crx
+*.pem
+.DS_Store
+*.log
