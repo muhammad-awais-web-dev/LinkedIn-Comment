@@ -1,5 +1,6 @@
 /* ═══════════════════════════════════════════════════════════════
-   AI Comment Generator — Popup Stylesheet
+   AI Comment Generator — Popup Stylesheet (Glassmorphism Dark)
+   Brand: Electric Purple #7B2CBF · Tech Blue #3A86FF
    ═══════════════════════════════════════════════════════════════ */
 
 /* ── Reset & base ──────────────────────────────────────────── */
@@ -12,43 +13,64 @@
 }
 
 :root {
-  --primary: #6366f1;
-  --primary-dark: #4f46e5;
-  --primary-light: #a5b4fc;
-  --bg: #f8fafc;
-  --surface: #ffffff;
-  --surface-hover: #f1f5f9;
-  --text: #1e293b;
-  --text-secondary: #64748b;
-  --border: #e2e8f0;
-  --border-focus: #6366f1;
-  --success: #10b981;
-  --success-bg: #ecfdf5;
-  --error: #ef4444;
-  --error-bg: #fef2f2;
-  --radius: 10px;
-  --radius-sm: 6px;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,.06);
-  --shadow-md: 0 4px 12px rgba(0,0,0,.08);
-  --transition: .15s ease;
-  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  /* Brand */
+  --purple: #7B2CBF;
+  --blue: #3A86FF;
+  --gradient-brand: linear-gradient(132deg, rgba(123,44,191,0.40) 0%, rgba(111,60,202,0.40) 34%, rgba(58,134,255,0.40) 100%);
+  --gradient-brand-solid: linear-gradient(90deg, #7B2CBF 0%, #6F3CCA 34%, #3A86FF 100%);
+
+  /* Surfaces */
+  --bg-deep: #18162C;
+  --bg-card: #15151A;
+  --glass: radial-gradient(ellipse 118% 87% at 16% 15%, rgba(255,255,255,0.40) 0%, rgba(170,170,170,0.20) 52%, rgba(255,255,255,0.20) 100%);
+  --glass-border: rgba(255,255,255,0.40);
+  --glass-border-accent: rgba(58,134,255,0.50);
+  --glass-shadow-inset: 0px 0px 17px rgba(255,255,255,0.25) inset;
+  --glass-shadow-purple: 3.4px 3.4px 13.6px rgba(123,44,191,0.30);
+
+  /* Text */
+  --heading: #FFFFFF;
+  --body: #ACAEBB;
+  --meta: #5C5E6B;
+
+  /* Status */
+  --success: #03BC54;
+  --error: #FD3801;
+
+  /* Shape */
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-btn: 24px;
+
+  /* Misc */
+  --transition: .18s ease;
+  --font-heading: 'Inter', sans-serif;
+  --font-body: 'JetBrains Mono', 'SF Mono', monospace;
+  --blur: blur(3.4px);
 }
 
 body {
-  font-family: var(--font);
+  font-family: var(--font-body);
   font-size: 13px;
-  line-height: 1.5;
-  color: var(--text);
-  background: var(--bg);
+  line-height: 1.55;
+  color: var(--body);
+  background: var(--bg-deep);
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── App container ─────────────────────────────────────────── */
+/* ── App container (glassmorphism window) ──────────────────── */
 .app {
-  width: 400px;
+  width: 420px;
   min-height: 100px;
   display: flex;
   flex-direction: column;
+  background: var(--glass), var(--gradient-brand);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  box-shadow: var(--glass-shadow-inset), var(--glass-shadow-purple);
+  border: 1.5px solid var(--glass-border);
+  border-radius: var(--radius);
+  overflow: hidden;
 }
 
 /* ── Header ────────────────────────────────────────────────── */
@@ -56,25 +78,36 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px;
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-  color: #fff;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, rgba(123,44,191,0.50) 0%, rgba(58,134,255,0.35) 100%);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
 }
 
 .header-left {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .logo {
-  font-size: 20px;
-  line-height: 1;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.logo img {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .app-header h1 {
-  font-size: 15px;
-  font-weight: 700;
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--heading);
   letter-spacing: -0.01em;
 }
 
@@ -84,25 +117,28 @@ body {
 }
 
 .icon-btn {
-  background: rgba(255,255,255,.15);
-  border: none;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.15);
   border-radius: var(--radius-sm);
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   font-size: 15px;
-  transition: background var(--transition);
+  transition: background var(--transition), border-color var(--transition);
+  backdrop-filter: blur(2px);
 }
 
 .icon-btn:hover {
-  background: rgba(255,255,255,.28);
+  background: rgba(255,255,255,0.18);
+  border-color: var(--glass-border-accent);
 }
 
 .icon-btn.active {
-  background: rgba(255,255,255,.35);
+  background: rgba(123,44,191,0.30);
+  border-color: var(--purple);
 }
 
 /* ── Main view ─────────────────────────────────────────────── */
@@ -110,7 +146,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 14px 16px 18px;
+  padding: 16px 18px 20px;
 }
 
 /* ── Platform badge ────────────────────────────────────────── */
@@ -123,70 +159,78 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--primary-dark);
-  background: #eef2ff;
-  padding: 3px 10px;
+  color: var(--blue);
+  background: rgba(58,134,255,0.12);
+  padding: 4px 12px;
   border-radius: 20px;
+  border: 1px solid rgba(58,134,255,0.25);
 }
 
 /* ── Form labels ───────────────────────────────────────────── */
 .field-label {
   display: block;
+  font-family: var(--font-body);
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--text-secondary);
-  margin-bottom: 4px;
+  color: var(--meta);
+  margin-bottom: 5px;
 }
 
 /* ── Textareas ─────────────────────────────────────────────── */
 textarea {
   width: 100%;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(255,255,255,0.15);
   border-radius: var(--radius-sm);
   padding: 10px 12px;
-  font-family: var(--font);
+  font-family: var(--font-body);
   font-size: 13px;
   line-height: 1.55;
-  color: var(--text);
-  background: var(--surface);
+  color: var(--heading);
+  background: rgba(21,21,26,0.70);
+  backdrop-filter: blur(2px);
   resize: vertical;
   transition: border-color var(--transition), box-shadow var(--transition);
   outline: none;
 }
 
 textarea:focus {
-  border-color: var(--border-focus);
-  box-shadow: 0 0 0 3px rgba(99,102,241,.12);
+  border-color: var(--glass-border-accent);
+  box-shadow: 0 0 0 3px rgba(58,134,255,0.15);
 }
 
 textarea::placeholder {
-  color: var(--text-secondary);
+  color: var(--meta);
 }
 
 /* ── Select dropdowns ──────────────────────────────────────── */
 select {
   width: 100%;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(255,255,255,0.15);
   border-radius: var(--radius-sm);
-  padding: 8px 30px 8px 10px;
-  font-family: var(--font);
+  padding: 9px 32px 9px 12px;
+  font-family: var(--font-body);
   font-size: 13px;
-  color: var(--text);
-  background: var(--surface);
+  color: var(--heading);
+  background: rgba(21,21,26,0.70);
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%2364748b' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23ACAEBB' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 10px center;
+  background-position: right 12px center;
   cursor: pointer;
   outline: none;
   transition: border-color var(--transition), box-shadow var(--transition);
 }
 
 select:focus {
-  border-color: var(--border-focus);
-  box-shadow: 0 0 0 3px rgba(99,102,241,.12);
+  border-color: var(--glass-border-accent);
+  box-shadow: 0 0 0 3px rgba(58,134,255,0.15);
+}
+
+select option {
+  background: #1e1c35;
+  color: var(--heading);
 }
 
 /* ── Controls grid (template + tone side by side) ──────────── */
@@ -224,30 +268,34 @@ select:focus {
   padding-bottom: 9px;
 }
 
-/* ── Generate button ───────────────────────────────────────── */
+/* ── Generate button (glassmorphism) ───────────────────────── */
 .generate-btn {
   width: 100%;
-  padding: 11px 16px;
+  padding: 13px 18px;
   border: none;
-  border-radius: var(--radius);
-  font-family: var(--font);
+  border-radius: var(--radius-btn);
+  font-family: var(--font-body);
   font-size: 14px;
-  font-weight: 600;
-  color: #fff;
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  font-weight: 700;
+  color: var(--heading);
+  background: var(--gradient-brand), var(--glass);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  box-shadow: var(--glass-shadow-inset), var(--glass-shadow-purple);
+  outline: 3px solid var(--glass-border-accent);
+  outline-offset: -3px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  transition: opacity var(--transition), transform var(--transition);
-  box-shadow: 0 2px 8px rgba(99,102,241,.3);
+  transition: opacity var(--transition), transform var(--transition), box-shadow var(--transition);
 }
 
 .generate-btn:hover:not(:disabled) {
-  opacity: 0.92;
+  opacity: 0.93;
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(99,102,241,.35);
+  box-shadow: var(--glass-shadow-inset), 4px 4px 18px rgba(123,44,191,0.45);
 }
 
 .generate-btn:active:not(:disabled) {
@@ -255,7 +303,7 @@ select:focus {
 }
 
 .generate-btn:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
@@ -264,7 +312,7 @@ select:focus {
   display: inline-block;
   width: 16px;
   height: 16px;
-  border: 2px solid rgba(255,255,255,.3);
+  border: 2px solid rgba(255,255,255,.25);
   border-top-color: #fff;
   border-radius: 50%;
   animation: spin .6s linear infinite;
@@ -281,8 +329,8 @@ select:focus {
   gap: 8px;
   padding: 10px 12px;
   border-radius: var(--radius-sm);
-  background: var(--error-bg);
-  border: 1px solid #fecaca;
+  background: rgba(253,56,1,0.10);
+  border: 1px solid rgba(253,56,1,0.30);
 }
 
 .error-box span {
@@ -299,25 +347,26 @@ select:focus {
 
 /* ── Output area ───────────────────────────────────────────── */
 .output-area {
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: rgba(21,21,26,0.60);
+  border: 1px solid rgba(255,255,255,0.15);
   border-radius: var(--radius);
   overflow: hidden;
+  backdrop-filter: blur(2px);
 }
 
 .output-area .output-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 12px;
-  background: #f0fdf4;
-  border-bottom: 1px solid #bbf7d0;
+  padding: 10px 14px;
+  background: rgba(3,188,84,0.10);
+  border-bottom: 1px solid rgba(3,188,84,0.20);
 }
 
 .output-area .output-header span {
   font-size: 12px;
   font-weight: 600;
-  color: #166534;
+  color: var(--success);
 }
 
 .output-actions {
@@ -326,19 +375,22 @@ select:focus {
 }
 
 .output-actions button {
-  padding: 4px 10px;
-  border: 1px solid #bbf7d0;
-  border-radius: var(--radius-sm);
-  background: #fff;
+  padding: 5px 12px;
+  border: 1px solid rgba(3,188,84,0.30);
+  border-radius: var(--radius-btn);
+  background: rgba(3,188,84,0.10);
+  font-family: var(--font-body);
   font-size: 11px;
   font-weight: 600;
-  color: #166534;
+  color: var(--success);
   cursor: pointer;
-  transition: background var(--transition);
+  transition: background var(--transition), border-color var(--transition);
+  backdrop-filter: blur(2px);
 }
 
 .output-actions button:hover {
-  background: #dcfce7;
+  background: rgba(3,188,84,0.20);
+  border-color: var(--success);
 }
 
 .output-actions button.copied {
@@ -350,17 +402,18 @@ select:focus {
 .output-area textarea {
   border: none;
   border-radius: 0;
-  padding: 12px;
+  padding: 12px 14px;
   min-height: 80px;
+  background: transparent;
 }
 
 .output-area textarea:focus {
   box-shadow: none;
 }
 
-/* ── Settings panel ────────────────────────────────────────── */
+/* ── Settings panel & template manager ─────────────────────── */
 .panel {
-  padding: 14px 16px 18px;
+  padding: 16px 18px 20px;
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -373,25 +426,27 @@ select:focus {
 }
 
 .panel-header h2 {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text);
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--heading);
 }
 
 .panel-close {
-  background: none;
-  border: none;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
   font-size: 18px;
   cursor: pointer;
-  color: var(--text-secondary);
+  color: var(--body);
   line-height: 1;
-  padding: 2px 4px;
+  padding: 4px 8px;
   border-radius: var(--radius-sm);
-  transition: background var(--transition);
+  transition: background var(--transition), border-color var(--transition);
 }
 
 .panel-close:hover {
-  background: var(--surface-hover);
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.25);
 }
 
 .panel-section {
@@ -401,33 +456,38 @@ select:focus {
 }
 
 .panel-section h3 {
-  font-size: 12px;
+  font-family: var(--font-heading);
+  font-size: 13px;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: var(--body);
 }
 
 /* ── Input fields ──────────────────────────────────────────── */
 input[type="text"],
 input[type="password"] {
   width: 100%;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(255,255,255,0.15);
   border-radius: var(--radius-sm);
-  padding: 8px 10px;
-  font-family: var(--font);
+  padding: 9px 12px;
+  font-family: var(--font-body);
   font-size: 13px;
-  color: var(--text);
-  background: var(--surface);
+  color: var(--heading);
+  background: rgba(21,21,26,0.70);
   outline: none;
   transition: border-color var(--transition), box-shadow var(--transition);
 }
 
 input[type="text"]:focus,
 input[type="password"]:focus {
-  border-color: var(--border-focus);
-  box-shadow: 0 0 0 3px rgba(99,102,241,.12);
+  border-color: var(--glass-border-accent);
+  box-shadow: 0 0 0 3px rgba(58,134,255,0.15);
 }
 
-/* ── Template manager ──────────────────────────────────────── */
+input::placeholder {
+  color: var(--meta);
+}
+
+/* ── Template list ─────────────────────────────────────────── */
 .template-list {
   display: flex;
   flex-direction: column;
@@ -438,15 +498,15 @@ input[type="password"]:focus {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 10px;
-  background: var(--surface);
-  border: 1px solid var(--border);
+  padding: 10px 12px;
+  background: rgba(21,21,26,0.55);
+  border: 1px solid rgba(255,255,255,0.10);
   border-radius: var(--radius-sm);
   transition: border-color var(--transition);
 }
 
 .template-item:hover {
-  border-color: var(--primary-light);
+  border-color: rgba(123,44,191,0.40);
 }
 
 .template-item .tpl-info {
@@ -460,12 +520,12 @@ input[type="password"]:focus {
 .template-item .tpl-name {
   font-size: 13px;
   font-weight: 600;
-  color: var(--text);
+  color: var(--heading);
 }
 
 .template-item .tpl-desc {
   font-size: 11px;
-  color: var(--text-secondary);
+  color: var(--meta);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -482,13 +542,13 @@ input[type="password"]:focus {
   border: none;
   font-size: 14px;
   cursor: pointer;
-  padding: 2px 4px;
+  padding: 3px 5px;
   border-radius: var(--radius-sm);
   transition: background var(--transition);
 }
 
 .template-item .tpl-actions button:hover {
-  background: var(--surface-hover);
+  background: rgba(255,255,255,0.10);
 }
 
 /* ── Template edit form ────────────────────────────────────── */
@@ -496,9 +556,9 @@ input[type="password"]:focus {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 10px;
-  background: #f0f9ff;
-  border: 1px solid #bae6fd;
+  padding: 12px;
+  background: rgba(58,134,255,0.06);
+  border: 1px solid rgba(58,134,255,0.20);
   border-radius: var(--radius-sm);
 }
 
@@ -514,41 +574,50 @@ input[type="password"]:focus {
   justify-content: flex-end;
 }
 
-/* ── Small buttons ─────────────────────────────────────────── */
+/* ── Small buttons (glassmorphism) ─────────────────────────── */
 .btn-sm {
-  padding: 6px 14px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  background: var(--surface);
+  padding: 7px 16px;
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: var(--radius-btn);
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(2px);
+  font-family: var(--font-body);
   font-size: 12px;
   font-weight: 600;
-  color: var(--text);
+  color: var(--body);
   cursor: pointer;
-  transition: background var(--transition);
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
 }
 
 .btn-sm:hover {
-  background: var(--surface-hover);
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.30);
+  color: var(--heading);
 }
 
 .btn-sm.primary {
-  background: var(--primary);
-  color: #fff;
-  border-color: var(--primary);
+  background: var(--gradient-brand), var(--glass);
+  backdrop-filter: var(--blur);
+  color: var(--heading);
+  border: none;
+  outline: 2.5px solid var(--glass-border-accent);
+  outline-offset: -2.5px;
+  box-shadow: var(--glass-shadow-inset), var(--glass-shadow-purple);
 }
 
 .btn-sm.primary:hover {
-  background: var(--primary-dark);
-  border-color: var(--primary-dark);
+  opacity: 0.9;
+  box-shadow: var(--glass-shadow-inset), 3px 3px 14px rgba(123,44,191,0.40);
 }
 
 .btn-sm.danger {
   color: var(--error);
-  border-color: #fecaca;
+  border-color: rgba(253,56,1,0.25);
 }
 
 .btn-sm.danger:hover {
-  background: var(--error-bg);
+  background: rgba(253,56,1,0.10);
+  border-color: rgba(253,56,1,0.45);
 }
 
 /* ── Add template button ───────────────────────────────────── */
@@ -557,11 +626,12 @@ input[type="password"]:focus {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 8px;
-  border: 2px dashed var(--border);
+  padding: 10px;
+  border: 2px dashed rgba(255,255,255,0.15);
   border-radius: var(--radius-sm);
   background: transparent;
-  color: var(--text-secondary);
+  color: var(--meta);
+  font-family: var(--font-body);
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
@@ -569,8 +639,8 @@ input[type="password"]:focus {
 }
 
 .add-tpl-btn:hover {
-  border-color: var(--primary-light);
-  color: var(--primary);
+  border-color: var(--glass-border-accent);
+  color: var(--blue);
 }
 
 /* ── Save bar (settings) ───────────────────────────────────── */
@@ -586,6 +656,24 @@ input[type="password"]:focus {
   overflow-y: auto;
 }
 
+/* Scrollbar styling for dark theme */
+.scrollable::-webkit-scrollbar {
+  width: 5px;
+}
+
+.scrollable::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.15);
+  border-radius: 10px;
+}
+
+.scrollable::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.25);
+}
+
 /* ── Animations ────────────────────────────────────────────── */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(4px); }
@@ -594,5 +682,5 @@ input[type="password"]:focus {
 
 .main-view,
 .panel {
-  animation: fadeIn .18s ease;
+  animation: fadeIn .2s ease;
 }

@@ -171,7 +171,9 @@ export function App() {
       {/* ── Header ─────────────────────────────────────────── */}
       <header className="app-header">
         <div className="header-left">
-          <span className="logo">✦</span>
+          <div className="logo">
+            <img src="logo.svg" alt="AI Comment" />
+          </div>
           <h1>AI Comment</h1>
         </div>
         <div className="header-right">

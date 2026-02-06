@@ -87,6 +87,19 @@ async function build() {
     resolve(outDir, 'popup/index.html')
   );
 
+  // Copy icons
+  cpSync(
+    resolve(__dirname, 'icons'),
+    resolve(outDir, 'icons'),
+    { recursive: true }
+  );
+
+  // Copy Logo.svg for popup use
+  cpSync(
+    resolve(__dirname, 'Logo.svg'),
+    resolve(outDir, 'popup/logo.svg')
+  );
+
   console.log('\n✅ Build complete → dist/\n');
 }
 
