@@ -1,7 +1,7 @@
 {
   "name": "ai-comment-generator",
   "version": "1.0.0",
-  "description": "AI-powered social media comment generator for LinkedIn, Facebook & Instagram",
+  "description": "AI-powered comment generator Chrome extension for LinkedIn",
   "private": true,
   "type": "module",
   "scripts": {

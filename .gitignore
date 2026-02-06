@@ -1,6 +1,9 @@
 node_modules/
 dist/
+release/
 *.crx
 *.pem
+*.zip
 .DS_Store
 *.log
+.env

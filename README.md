@@ -1,132 +1,186 @@
-# ✦ AI Comment Generator — Browser Extension
+# ✦ AI Comment Generator for LinkedIn
 
-Generate AI-powered comments for **LinkedIn**, **Facebook**, and **Instagram** in seconds.
+A Chrome extension that generates AI-powered comments for LinkedIn posts. Select any post text, pick a template and tone, and get a polished, professional comment in seconds.
 
-Select any post text → pick a template & tone → get a polished, platform-appropriate comment.
+![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-4285F4?logo=googlechrome&logoColor=white)
+![Manifest V3](https://img.shields.io/badge/Manifest-V3-0A66C2)
+![React 18](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178C6?logo=typescript&logoColor=white)
 
 ---
 
-## Features
+## ✨ Features
 
 | Feature | Description |
 |---|---|
-| 🔍 Text selection detection | Floating button appears when you select text on supported platforms |
-| 🎨 4 built-in templates | Supportive · Insightful · Question-based · Engagement-focused |
-| 🎭 6 tone options | Professional · Friendly · Casual · Thoughtful · Bold · Encouraging |
-| 🤖 Multi-provider AI | Google Gemini and OpenRouter (OpenAI-compatible) |
-| 📝 Custom templates | Create, edit, and delete your own prompt templates |
-| 📋 Copy & Insert | One-click copy or auto-insert into the page comment box |
-| 💾 Persistent settings | API keys, templates, and preferences saved locally |
+| 🔍 **Post text detection** | Automatically extracts post text when you click the ✦ button on any comment bar |
+| ✦ **Inline panel** | Full generate → edit → insert flow right inside LinkedIn — no popup needed |
+| 🎨 **4 built-in templates** | Supportive · Insightful · Question-based · Engagement-focused |
+| 🎭 **6 tone options** | Professional · Friendly · Casual · Thoughtful · Bold · Encouraging |
+| 🤖 **Multi-provider AI** | Google Gemini and OpenRouter (supports dozens of models) |
+| 📝 **Custom templates** | Create, edit, and delete your own prompt templates |
+| 📋 **Copy & Insert** | One-click copy to clipboard or auto-insert into the comment box |
+| 💾 **Persistent settings** | API keys, templates, and preferences saved locally via Chrome Storage |
+| 🎯 **LinkedIn-optimized** | Professional tone, minimal emoji usage, insight-driven commentary |
 
 ---
 
-## Quick Start
+## 🚀 Quick Start
 
-### 1. Install dependencies & build
+### 1. Clone & Install
 
 ```bash
+git clone https://github.com/muhammad-awais-web-dev/LinkedIn-Comment.git
+cd LinkedIn-Comment
 npm install
-npm run build        # production build → dist/
-npm run watch        # dev mode with hot rebuild
 ```
 
-### 2. Load in Chrome
+### 2. Build
+
+```bash
+npm run build        # Production build → dist/
+npm run watch        # Dev mode with auto-rebuild on file changes
+```
+
+### 3. Load in Chrome
 
 1. Open **chrome://extensions**
 2. Enable **Developer mode** (top-right toggle)
 3. Click **Load unpacked**
-4. Select the `dist/` folder
+4. Select the **`dist/`** folder
 
-### 3. Add an API key
+### 4. Add an API Key
 
-Click the extension icon → ⚙️ Settings → enter your **Gemini** or **OpenRouter** API key.
+Click the extension icon → ⚙️ **Settings** → enter your API key:
 
-- **Gemini**: Get a free key at [aistudio.google.com](https://aistudio.google.com/apikey)
-- **OpenRouter**: Get a key at [openrouter.ai/keys](https://openrouter.ai/keys)
+| Provider | Get a Key |
+|---|---|
+| **Google Gemini** | [aistudio.google.com/apikey](https://aistudio.google.com/apikey) (free tier available) |
+| **OpenRouter** | [openrouter.ai/keys](https://openrouter.ai/keys) (pay-per-use, many models) |
 
-### 4. Generate a comment
+### 5. Generate a Comment
 
-1. Go to LinkedIn / Facebook / Instagram
-2. **Select text** from any post
-3. Click the floating ✦ button that appears
-4. Choose template, tone, and provider
-5. Click **✦ Generate Comment**
-6. Edit if needed → **Copy** or **Insert**
+1. Go to **linkedin.com**
+2. Find any post and click the **✦ AI Comment** button in the comment bar
+3. The inline panel opens — choose a template, tone, and provider
+4. Click **✦ Generate Comment**
+5. Edit if needed → **Insert** into the comment box or **Copy** to clipboard
+
+You can also **select text** on any post and a floating ✦ button will appear.
 
 ---
 
-## Project Structure
+## 📂 Project Structure
 
 ```
-src/
-├── shared/                     # Shared types, storage, prompt builder
-│   ├── types.ts                # TypeScript type definitions
-│   ├── storage.ts              # Chrome storage helpers
-│   ├── promptBuilder.ts        # Dynamic prompt assembly
-│   ├── defaultTemplates.ts     # 4 built-in comment templates
-│   └── providers/
-│       ├── AIProvider.ts       # Provider interface
-│       ├── gemini.ts           # Google Gemini implementation
-│       ├── openRouter.ts       # OpenRouter implementation
-│       └── factory.ts          # Provider factory
-├── background/
-│   └── serviceWorker.ts        # MV3 service worker (API calls)
-├── contentScripts/
-│   └── index.ts                # Text selection + floating button
-└── popup/
-    ├── index.html              # Popup entry HTML
-    ├── main.tsx                # React entry point
-    ├── App.tsx                 # Root component
-    ├── App.css                 # Full stylesheet
-    └── components/
-        ├── SelectedTextArea.tsx
-        ├── TemplateSelector.tsx
-        ├── ToneSelector.tsx
-        ├── ProviderSelector.tsx
-        ├── GenerateButton.tsx
-        ├── OutputArea.tsx
-        ├── SettingsPanel.tsx
-        └── TemplateManager.tsx
+├── manifest.json                # Chrome Extension Manifest V3
+├── build.mjs                    # esbuild bundler config
+├── package.json
+├── tsconfig.json
+├── Logo.svg                     # Extension logo
+├── icons/                       # Extension icons (16/32/48/128 PNG)
+└── src/
+    ├── shared/                  # Shared modules
+    │   ├── types.ts             # TypeScript type definitions
+    │   ├── storage.ts           # Chrome storage helpers
+    │   ├── promptBuilder.ts     # Dynamic prompt assembly
+    │   ├── defaultTemplates.ts  # 4 built-in comment templates
+    │   └── providers/
+    │       ├── AIProvider.ts    # Provider interface
+    │       ├── gemini.ts        # Google Gemini implementation
+    │       ├── openRouter.ts    # OpenRouter implementation
+    │       └── factory.ts       # Provider factory
+    ├── background/
+    │   └── serviceWorker.ts     # MV3 service worker (handles API calls)
+    ├── contentScripts/
+    │   └── index.ts             # LinkedIn injection: ✦ button, inline panel, FAB
+    └── popup/
+        ├── index.html           # Popup entry HTML
+        ├── main.tsx             # React entry point
+        ├── App.tsx              # Root component
+        ├── App.css              # LinkedIn-themed stylesheet
+        └── components/
+            ├── SelectedTextArea.tsx
+            ├── TemplateSelector.tsx
+            ├── ToneSelector.tsx
+            ├── ProviderSelector.tsx
+            ├── GenerateButton.tsx
+            ├── OutputArea.tsx
+            ├── SettingsPanel.tsx
+            └── TemplateManager.tsx
 ```
 
 ---
 
-## Tech Stack
+## 🛠️ Tech Stack
 
-- **Chrome Extension Manifest V3**
-- **React 18** — popup UI
-- **TypeScript** — full type safety
-- **esbuild** — fast bundler (content script, service worker, popup)
-- **Chrome Storage API** — local persistence
+| Technology | Purpose |
+|---|---|
+| **Chrome Extension Manifest V3** | Extension platform |
+| **React 18** | Popup UI |
+| **TypeScript 5.6** | Type safety across the codebase |
+| **esbuild** | Fast bundler for content script, service worker, and popup |
+| **Chrome Storage API** | Local persistence of settings, templates, and API keys |
+| **Shadow DOM** | Inline panel isolation from LinkedIn's page styles |
 
 ---
 
-## Adding a New AI Provider
+## 🤖 Supported AI Models
 
-1. Create `src/shared/providers/myProvider.ts` implementing the `AIProvider` interface
-2. Add the provider metadata to `PROVIDER_META` in `src/shared/types.ts`
-3. Register it in `src/shared/providers/factory.ts`
+### Google Gemini
+- `gemini-2.0-flash` (default)
+- `gemini-2.0-flash-lite`
+- `gemini-1.5-flash`
+- `gemini-1.5-pro`
+
+### OpenRouter
+- `google/gemini-2.0-flash-001`
+- `meta-llama/llama-3.3-70b-instruct`
+- `deepseek/deepseek-chat`
+- `mistralai/mistral-small-24b-instruct-2501`
+
+---
+
+## 🔧 Adding a New AI Provider
+
+1. Create `src/shared/providers/myProvider.ts` implementing the `AIProvider` interface:
 
 ```ts
-// AIProvider interface
 interface AIProvider {
   readonly name: string;
   generate(prompt: string): Promise<string>;
 }
 ```
 
----
-
-## Supported Platforms
-
-| Platform | Tone Behavior | Emoji Level |
-|---|---|---|
-| LinkedIn | Professional, insight-driven | Minimal |
-| Facebook | Conversational, friendly | Moderate |
-| Instagram | Casual, engaging | Heavy |
+2. Add provider metadata to `PROVIDER_META` in `src/shared/types.ts`
+3. Register it in `src/shared/providers/factory.ts`
 
 ---
 
-## License
+## 🔒 Privacy
 
-MIT
+- **No data leaves your browser** except the prompt sent to your chosen AI provider.
+- API keys are stored locally in Chrome storage — never transmitted to any third-party server.
+- No analytics, tracking, or telemetry.
+- The extension only activates on `linkedin.com`.
+
+---
+
+## 📦 Building for Chrome Web Store
+
+```bash
+npm run build
+cd dist && zip -r ../ai-comment-generator.zip . && cd ..
+```
+
+Upload the generated `.zip` file to the [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole).
+
+---
+
+## 📄 License
+
+MIT — free to use, modify, and distribute.
+
+---
+
+**Made with ✦ by [Muhammad Awais](https://github.com/muhammad-awais-web-dev)**
