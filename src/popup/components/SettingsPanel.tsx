@@ -84,6 +84,39 @@ export function SettingsPanel({ providerConfigs, onSave, onClose }: Props) {
           {saved ? '✓ Saved!' : 'Save settings'}
         </button>
       </div>
+
+      <div className="panel-section" style={{ borderTop: '1px solid var(--border-color)', paddingTop: '12px', marginTop: '4px' }}>
+        <h3>💖 Support</h3>
+        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+          <a
+            href="https://github.com/muhammad-awais-web-dev/LinkedIn-Comment"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-sm"
+            style={{ textDecoration: 'none', textAlign: 'center' }}
+          >
+            ⭐ Star on GitHub
+          </a>
+          <a
+            href="https://github.com/sponsors/muhammad-awais-web-dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-sm"
+            style={{ textDecoration: 'none', textAlign: 'center' }}
+          >
+            ❤️ Sponsor
+          </a>
+          <a
+            href="https://www.linkedin.com/in/muhammad-awais-web-dev/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-sm"
+            style={{ textDecoration: 'none', textAlign: 'center' }}
+          >
+            🔗 LinkedIn
+          </a>
+        </div>
+      </div>
     </div>
   );
 }
