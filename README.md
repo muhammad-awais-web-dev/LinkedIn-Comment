@@ -25,10 +25,12 @@ A Chrome extension that generates AI-powered comments for LinkedIn posts. Select
 | ✦ **Inline panel** | Full generate → edit → insert flow right inside LinkedIn — no popup needed |
 | 🎨 **4 built-in templates** | Supportive · Insightful · Question-based · Engagement-focused |
 | 🎭 **6 tone options** | Professional · Friendly · Casual · Thoughtful · Bold · Encouraging |
-| 🤖 **Multi-provider AI** | Google Gemini and OpenRouter (supports dozens of models) |
-| 📝 **Custom templates** | Create, edit, and delete your own prompt templates |
+| 🤖 **Multi-provider AI** | Google Gemini, OpenRouter, OpenAI, Anthropic Claude, and Groq — 5 providers with 20+ models |
+| ✏️ **Custom editor** | Full-page editor for creating custom templates and tones — opens in a new tab |
+| 📝 **Template & Tone manager** | Create, edit, and delete your own prompt templates and custom tones |
 | 📋 **Copy & Insert** | One-click copy to clipboard or auto-insert into the comment box |
-| 💾 **Persistent settings** | API keys, templates, and preferences saved locally via Chrome Storage |
+| 💾 **Persistent settings** | API keys, templates, tones, and preferences saved locally via Chrome Storage |
+| 🔗 **Social links** | Quick access to GitHub (star/sponsor) and LinkedIn from within the extension |
 | 🎯 **LinkedIn-optimized** | Professional tone, minimal emoji usage, insight-driven commentary |
 
 ---
@@ -65,6 +67,9 @@ Click the extension icon → ⚙️ **Settings** → enter your API key:
 |---|---|
 | **Google Gemini** | [aistudio.google.com/apikey](https://aistudio.google.com/apikey) (free tier available) |
 | **OpenRouter** | [openrouter.ai/keys](https://openrouter.ai/keys) (pay-per-use, many models) |
+| **OpenAI** | [platform.openai.com/api-keys](https://platform.openai.com/api-keys) (GPT-4 and more) |
+| **Anthropic** | [console.anthropic.com/settings/keys](https://console.anthropic.com/settings/keys) (Claude models) |
+| **Groq** | [console.groq.com/keys](https://console.groq.com/keys) (fast inference) |
 
 ### 5. Generate a Comment
 
@@ -75,6 +80,14 @@ Click the extension icon → ⚙️ **Settings** → enter your API key:
 5. Edit if needed → **Insert** into the comment box or **Copy** to clipboard
 
 You can also **select text** on any post and a floating ✦ button will appear.
+
+### 6. Customize Templates & Tones
+
+1. Click the extension icon → **✏️ Edit Templates & Tones** button (top-right)
+2. Opens a full-page editor in a new tab with two sections:
+   - **Templates**: Create custom prompt templates with placeholders
+   - **Tones**: Define custom tone styles for comment generation
+3. Changes are saved automatically to Chrome storage
 
 ---
 
@@ -97,11 +110,19 @@ You can also **select text** on any post and a floating ✦ button will appear.
     │       ├── AIProvider.ts    # Provider interface
     │       ├── gemini.ts        # Google Gemini implementation
     │       ├── openRouter.ts    # OpenRouter implementation
+    │       ├── openai.ts        # OpenAI GPT models
+    │       ├── anthropic.ts     # Anthropic Claude models
+    │       ├── groq.ts          # Groq inference
     │       └── factory.ts       # Provider factory
     ├── background/
     │   └── serviceWorker.ts     # MV3 service worker (handles API calls)
     ├── contentScripts/
     │   └── index.ts             # LinkedIn injection: ✦ button, inline panel, FAB
+    ├── editor/                  # Full-page editor (new tab)
+    │   ├── index.html           # Editor HTML page
+    │   ├── main.tsx             # Editor React entry
+    │   ├── EditorApp.tsx        # Template & tone CRUD UI
+    │   └── editor.css           # Editor styles
     └── popup/
         ├── index.html           # Popup entry HTML
         ├── main.tsx             # React entry point
@@ -146,6 +167,23 @@ You can also **select text** on any post and a floating ✦ button will appear.
 - `meta-llama/llama-3.3-70b-instruct`
 - `deepseek/deepseek-chat`
 - `mistralai/mistral-small-24b-instruct-2501`
+
+### OpenAI
+- `gpt-4o-mini` (default)
+- `gpt-4o`
+- `gpt-4.1-nano`
+- `gpt-4.1-mini`
+- `o4-mini`
+
+### Anthropic Claude
+- `claude-sonnet-4-20250514` (default)
+- `claude-3-5-haiku-20241022`
+
+### Groq
+- `llama-3.3-70b-versatile` (default)
+- `llama-3.1-8b-instant`
+- `mixtral-8x7b-32768`
+- `gemma2-9b-it`
 
 ---
 
@@ -192,7 +230,7 @@ If this extension saves you time, consider supporting its development:
 - ⭐ **[Star this repo](https://github.com/muhammad-awais-web-dev/LinkedIn-Comment)** — it's free and helps others discover it
 - ❤️ **[Become a GitHub Sponsor](https://github.com/sponsors/muhammad-awais-web-dev)** — support ongoing development
 - 🔗 **[Connect on LinkedIn](https://www.linkedin.com/in/muhammad-awais-web-dev/)** — let's network!
-
+> **Quick Access:** All social links are also available in the extension's Settings panel for easy access!
 ---
 
 ## 🎯 Portfolio Project
@@ -201,9 +239,9 @@ This project demonstrates proficiency in:
 
 - **Chrome Extension Development** — Manifest V3, content scripts, service workers, Shadow DOM
 - **React & TypeScript** — Component architecture, hooks, type-safe state management
-- **AI Integration** — Multi-provider API abstraction (Gemini, OpenRouter)
+- **AI Integration** — Multi-provider API abstraction (Gemini, OpenRouter, OpenAI, Anthropic, Groq)
 - **Modern Tooling** — esbuild bundler, CSS custom properties, Chrome Storage API
-- **UX Design** — LinkedIn-native theming, inline panels, responsive popup UI
+- **UX Design** — LinkedIn-native theming, inline panels, full-page editor, responsive popup UI
 
 👉 **[View the source code](https://github.com/muhammad-awais-web-dev/LinkedIn-Comment)**
 
