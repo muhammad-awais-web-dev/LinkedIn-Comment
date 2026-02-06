@@ -84,6 +84,36 @@ export function SettingsPanel({ providerConfigs, onSave, onClose }: Props) {
           {saved ? '✓ Saved!' : 'Save settings'}
         </button>
       </div>
+
+      <div className="panel-section support-section">
+        <h3>💖 Support</h3>
+        <div className="support-links">
+          <a
+            href="https://github.com/muhammad-awais-web-dev/LinkedIn-Comment"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-sm"
+          >
+            ⭐ Star on GitHub
+          </a>
+          <a
+            href="https://github.com/sponsors/muhammad-awais-web-dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-sm"
+          >
+            ❤️ Sponsor
+          </a>
+          <a
+            href="https://www.linkedin.com/in/muhammad-awais-web-dev/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-sm"
+          >
+            🔗 LinkedIn
+          </a>
+        </div>
+      </div>
     </div>
   );
 }

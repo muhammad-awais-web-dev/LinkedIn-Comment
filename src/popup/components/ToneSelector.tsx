@@ -1,13 +1,13 @@
 import React from 'react';
-import type { Tone } from '../../shared/types';
-import { TONES } from '../../shared/types';
+import type { Tone, ToneOption } from '../../shared/types';
 
 interface Props {
   selectedTone: Tone;
   onChange: (tone: Tone) => void;
+  tones: ToneOption[];
 }
 
-export function ToneSelector({ selectedTone, onChange }: Props) {
+export function ToneSelector({ selectedTone, onChange, tones }: Props) {
   return (
     <div className="field-group">
       <label className="field-label">Tone</label>
@@ -15,7 +15,7 @@ export function ToneSelector({ selectedTone, onChange }: Props) {
         value={selectedTone}
         onChange={(e) => onChange(e.target.value as Tone)}
       >
-        {TONES.map((t) => (
+        {tones.map((t) => (
           <option key={t.value} value={t.value}>
             {t.emoji} {t.label}
           </option>

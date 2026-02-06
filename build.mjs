@@ -55,17 +55,29 @@ async function build() {
     loader: { '.tsx': 'tsx', '.ts': 'ts' },
   };
 
+  // --- Editor React App (IIFE, bundles React) ---
+  const editorOpts = {
+    ...commonOptions,
+    entryPoints: [resolve(__dirname, 'src/editor/main.tsx')],
+    outfile: resolve(outDir, 'editor/main.js'),
+    format: 'iife',
+    jsx: 'automatic',
+    loader: { '.tsx': 'tsx', '.ts': 'ts' },
+  };
+
   if (isWatch) {
-    const [contentCtx, bgCtx, popupCtx] = await Promise.all([
+    const [contentCtx, bgCtx, popupCtx, editorCtx] = await Promise.all([
       esbuild.context(contentOpts),
       esbuild.context(bgOpts),
       esbuild.context(popupOpts),
+      esbuild.context(editorOpts),
     ]);
 
     await Promise.all([
       contentCtx.watch(),
       bgCtx.watch(),
       popupCtx.watch(),
+      editorCtx.watch(),
     ]);
 
     console.log('\n👀 Watching for changes...\n');
@@ -74,6 +86,7 @@ async function build() {
       esbuild.build(contentOpts),
       esbuild.build(bgOpts),
       esbuild.build(popupOpts),
+      esbuild.build(editorOpts),
     ]);
   }
 
@@ -85,6 +98,12 @@ async function build() {
   cpSync(
     resolve(__dirname, 'src/popup/index.html'),
     resolve(outDir, 'popup/index.html')
+  );
+
+  // Copy editor HTML
+  cpSync(
+    resolve(__dirname, 'src/editor/index.html'),
+    resolve(outDir, 'editor/index.html')
   );
 
   // Copy icons

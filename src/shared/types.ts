@@ -12,16 +12,27 @@ export type Tone =
   | 'casual'
   | 'thoughtful'
   | 'bold'
-  | 'encouraging';
+  | 'encouraging'
+  | (string & {}); // allows custom tones
 
-export const TONES: { value: Tone; label: string; emoji: string }[] = [
-  { value: 'professional', label: 'Professional', emoji: '💼' },
-  { value: 'friendly', label: 'Friendly', emoji: '😊' },
-  { value: 'casual', label: 'Casual', emoji: '✌️' },
-  { value: 'thoughtful', label: 'Thoughtful', emoji: '🤔' },
-  { value: 'bold', label: 'Bold', emoji: '🔥' },
-  { value: 'encouraging', label: 'Encouraging', emoji: '🙌' },
+export interface ToneOption {
+  value: string;
+  label: string;
+  emoji: string;
+  isDefault?: boolean;
+}
+
+export const DEFAULT_TONES: ToneOption[] = [
+  { value: 'professional', label: 'Professional', emoji: '💼', isDefault: true },
+  { value: 'friendly', label: 'Friendly', emoji: '😊', isDefault: true },
+  { value: 'casual', label: 'Casual', emoji: '✌️', isDefault: true },
+  { value: 'thoughtful', label: 'Thoughtful', emoji: '🤔', isDefault: true },
+  { value: 'bold', label: 'Bold', emoji: '🔥', isDefault: true },
+  { value: 'encouraging', label: 'Encouraging', emoji: '🙌', isDefault: true },
 ];
+
+/** @deprecated Use DEFAULT_TONES instead */
+export const TONES = DEFAULT_TONES;
 
 // ── Templates ─────────────────────────────────────────────────
 export interface CommentTemplate {
@@ -33,7 +44,7 @@ export interface CommentTemplate {
 }
 
 // ── AI Providers ──────────────────────────────────────────────
-export type ProviderId = 'gemini' | 'openrouter';
+export type ProviderId = 'gemini' | 'openai' | 'anthropic' | 'groq' | 'openrouter';
 
 export interface ProviderMeta {
   id: ProviderId;
@@ -52,6 +63,38 @@ export const PROVIDER_META: Record<ProviderId, ProviderMeta> = {
       'gemini-2.0-flash-lite',
       'gemini-1.5-flash',
       'gemini-1.5-pro',
+    ],
+  },
+  openai: {
+    id: 'openai',
+    name: 'OpenAI',
+    defaultModel: 'gpt-4o-mini',
+    models: [
+      'gpt-4o-mini',
+      'gpt-4o',
+      'gpt-4.1-nano',
+      'gpt-4.1-mini',
+      'o4-mini',
+    ],
+  },
+  anthropic: {
+    id: 'anthropic',
+    name: 'Anthropic Claude',
+    defaultModel: 'claude-sonnet-4-20250514',
+    models: [
+      'claude-sonnet-4-20250514',
+      'claude-3-5-haiku-20241022',
+    ],
+  },
+  groq: {
+    id: 'groq',
+    name: 'Groq',
+    defaultModel: 'llama-3.3-70b-versatile',
+    models: [
+      'llama-3.3-70b-versatile',
+      'llama-3.1-8b-instant',
+      'mixtral-8x7b-32768',
+      'gemma2-9b-it',
     ],
   },
   openrouter: {
@@ -85,6 +128,8 @@ export interface StorageSchema {
   selection: { text: string; platform: Platform } | null;
   /** User-created + default templates */
   templates: CommentTemplate[];
+  /** Custom tones created by user */
+  customTones: ToneOption[];
   /** Per-provider API key & model */
   providerConfigs: Record<ProviderId, ProviderConfig>;
   /** General user preferences */

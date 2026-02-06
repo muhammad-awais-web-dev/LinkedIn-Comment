@@ -2,10 +2,18 @@
 
 A Chrome extension that generates AI-powered comments for LinkedIn posts. Select any post text, pick a template and tone, and get a polished, professional comment in seconds.
 
+[![GitHub Sponsors](https://img.shields.io/badge/Sponsor-%E2%9D%A4-ea4aaa?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/muhammad-awais-web-dev)
+[![GitHub Stars](https://img.shields.io/github/stars/muhammad-awais-web-dev/LinkedIn-Comment?style=social)](https://github.com/muhammad-awais-web-dev/LinkedIn-Comment)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Muhammad%20Awais-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/muhammad-awais-web-dev/)
+
 ![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-4285F4?logo=googlechrome&logoColor=white)
 ![Manifest V3](https://img.shields.io/badge/Manifest-V3-0A66C2)
 ![React 18](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178C6?logo=typescript&logoColor=white)
+
+> **⭐ If you find this useful, please star the repo — it helps a lot!**
+>
+> **❤️ [Sponsor this project](https://github.com/sponsors/muhammad-awais-web-dev)** to support ongoing development.
 
 ---
 
@@ -177,10 +185,34 @@ Upload the generated `.zip` file to the [Chrome Web Store Developer Dashboard](h
 
 ---
 
+## � Support This Project
+
+If this extension saves you time, consider supporting its development:
+
+- ⭐ **[Star this repo](https://github.com/muhammad-awais-web-dev/LinkedIn-Comment)** — it's free and helps others discover it
+- ❤️ **[Become a GitHub Sponsor](https://github.com/sponsors/muhammad-awais-web-dev)** — support ongoing development
+- 🔗 **[Connect on LinkedIn](https://www.linkedin.com/in/muhammad-awais-web-dev/)** — let's network!
+
+---
+
+## 🎯 Portfolio Project
+
+This project demonstrates proficiency in:
+
+- **Chrome Extension Development** — Manifest V3, content scripts, service workers, Shadow DOM
+- **React & TypeScript** — Component architecture, hooks, type-safe state management
+- **AI Integration** — Multi-provider API abstraction (Gemini, OpenRouter)
+- **Modern Tooling** — esbuild bundler, CSS custom properties, Chrome Storage API
+- **UX Design** — LinkedIn-native theming, inline panels, responsive popup UI
+
+👉 **[View the source code](https://github.com/muhammad-awais-web-dev/LinkedIn-Comment)**
+
+---
+
 ## 📄 License
 
 MIT — free to use, modify, and distribute.
 
 ---
 
-**Made with ✦ by [Muhammad Awais](https://github.com/muhammad-awais-web-dev)**
+**Made with ✦ by [Muhammad Awais](https://github.com/muhammad-awais-web-dev)** · [LinkedIn](https://www.linkedin.com/in/muhammad-awais-web-dev/)
