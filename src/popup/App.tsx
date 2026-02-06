@@ -35,7 +35,7 @@ export function App() {
 
   // ── Form state ────────────────────────────────────────────
   const [selectedText, setSelectedText] = useState('');
-  const [platform, setPlatform] = useState<Platform>('unknown');
+  const [platform] = useState<Platform>('linkedin');
   const [tone, setTone] = useState<Tone>('professional');
   const [selectedTemplateId, setSelectedTemplateId] = useState('supportive');
   const [providerId, setProviderId] = useState<ProviderId>('gemini');
@@ -67,7 +67,6 @@ export function App() {
 
       if (sel) {
         setSelectedText(sel.text);
-        setPlatform(sel.platform);
       }
       setTemplates(tmpl);
       setProviderConfigs(configs);
@@ -158,12 +157,7 @@ export function App() {
   }, [tone, providerId]);
 
   // ── Platform badge helper ─────────────────────────────────
-  const platformLabel: Record<Platform, string> = {
-    linkedin: '🔗 LinkedIn',
-    facebook: '📘 Facebook',
-    instagram: '📸 Instagram',
-    unknown: '🌐 Unknown',
-  };
+  const platformLabel = '🔗 LinkedIn';
 
   // ── Render ────────────────────────────────────────────────
   return (
@@ -216,7 +210,7 @@ export function App() {
       {view === 'main' && (
         <div className="main-view">
           {/* Platform badge */}
-          <div className="platform-badge">{platformLabel[platform]}</div>
+          <div className="platform-badge">{platformLabel}</div>
 
           {/* Selected text */}
           <SelectedTextArea

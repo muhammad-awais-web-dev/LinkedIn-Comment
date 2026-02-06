@@ -1,9 +1,9 @@
 /* ═══════════════════════════════════════════════════════════════
-   AI Comment Generator — Popup Stylesheet (Glassmorphism Dark)
-   Brand: Electric Purple #7B2CBF · Tech Blue #3A86FF
+   AI Comment Generator — LinkedIn Theme
+   Clean white professional design with LinkedIn blue accent
    ═══════════════════════════════════════════════════════════════ */
 
-/* ── Reset & base ──────────────────────────────────────────── */
+/* ── Reset ─────────────────────────────────────────────────── */
 *,
 *::before,
 *::after {
@@ -12,65 +12,69 @@
   padding: 0;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   CSS VARIABLES — LinkedIn
+   ═══════════════════════════════════════════════════════════════ */
 :root {
-  /* Brand */
-  --purple: #7B2CBF;
-  --blue: #3A86FF;
-  --gradient-brand: linear-gradient(132deg, rgba(123,44,191,0.40) 0%, rgba(111,60,202,0.40) 34%, rgba(58,134,255,0.40) 100%);
-  --gradient-brand-solid: linear-gradient(90deg, #7B2CBF 0%, #6F3CCA 34%, #3A86FF 100%);
-
-  /* Surfaces */
-  --bg-deep: #18162C;
-  --bg-card: #15151A;
-  --glass: radial-gradient(ellipse 118% 87% at 16% 15%, rgba(255,255,255,0.40) 0%, rgba(170,170,170,0.20) 52%, rgba(255,255,255,0.20) 100%);
-  --glass-border: rgba(255,255,255,0.40);
-  --glass-border-accent: rgba(58,134,255,0.50);
-  --glass-shadow-inset: 0px 0px 17px rgba(255,255,255,0.25) inset;
-  --glass-shadow-purple: 3.4px 3.4px 13.6px rgba(123,44,191,0.30);
-
-  /* Text */
-  --heading: #FFFFFF;
-  --body: #ACAEBB;
-  --meta: #5C5E6B;
-
-  /* Status */
-  --success: #03BC54;
-  --error: #FD3801;
-
-  /* Shape */
-  --radius: 16px;
-  --radius-sm: 10px;
-  --radius-btn: 24px;
-
-  /* Misc */
+  --radius: 14px;
+  --radius-sm: 8px;
+  --radius-btn: 22px;
   --transition: .18s ease;
-  --font-heading: 'Inter', sans-serif;
-  --font-body: 'JetBrains Mono', 'SF Mono', monospace;
-  --blur: blur(3.4px);
+  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --accent: #0A66C2;
+  --accent-2: #004182;
+  --bg-app: #FFFFFF;
+  --bg-header: linear-gradient(135deg, #0A66C2 0%, #004182 100%);
+  --bg-surface: #F3F6F8;
+  --bg-input: #FFFFFF;
+  --border-color: #E0E0E0;
+  --border-focus: rgba(10,102,194,0.50);
+  --text-primary: #1D2226;
+  --text-secondary: #666666;
+  --text-muted: #999999;
+  --badge-bg: rgba(10,102,194,0.08);
+  --badge-text: #0A66C2;
+  --badge-border: rgba(10,102,194,0.20);
+  --btn-bg: linear-gradient(135deg, #0A66C2 0%, #004182 100%);
+  --btn-text: #FFFFFF;
+  --btn-shadow: 0 4px 14px rgba(10,102,194,0.25);
+  --btn-hover-shadow: 0 6px 20px rgba(10,102,194,0.40);
+  --success: #057642;
+  --success-bg: #E8F5E9;
+  --success-border: #C8E6C9;
+  --error: #CC1016;
+  --error-bg: #FFF3F2;
+  --error-border: #FFCDD2;
+  --option-bg: #FFFFFF;
+  --scrollbar-thumb: rgba(0,0,0,0.12);
+  --scrollbar-hover: rgba(0,0,0,0.22);
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   BASE STYLES
+   ═══════════════════════════════════════════════════════════════ */
 
 body {
   font-family: var(--font-body);
   font-size: 13px;
   line-height: 1.55;
-  color: var(--body);
-  background: var(--bg-deep);
   -webkit-font-smoothing: antialiased;
+  margin: 0;
+  padding: 0;
 }
 
-/* ── App container (glassmorphism window) ──────────────────── */
+/* ── App container ─────────────────────────────────────────── */
 .app {
   width: 420px;
   min-height: 100px;
   display: flex;
   flex-direction: column;
-  background: var(--glass), var(--gradient-brand);
-  backdrop-filter: var(--blur);
-  -webkit-backdrop-filter: var(--blur);
-  box-shadow: var(--glass-shadow-inset), var(--glass-shadow-purple);
-  border: 1.5px solid var(--glass-border);
-  border-radius: var(--radius);
+  background: var(--bg-app);
+  color: var(--text-secondary);
   overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
 }
 
 /* ── Header ────────────────────────────────────────────────── */
@@ -79,8 +83,8 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 14px 18px;
-  background: linear-gradient(135deg, rgba(123,44,191,0.50) 0%, rgba(58,134,255,0.35) 100%);
-  border-bottom: 1px solid rgba(255,255,255,0.12);
+  background: var(--bg-header);
+  border-bottom: 1px solid rgba(255,255,255,0.10);
 }
 
 .header-left {
@@ -90,24 +94,27 @@ body {
 }
 
 .logo {
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
+  background: rgba(255,255,255,0.15);
+  padding: 2px;
 }
 
 .logo img {
   width: 100%;
   height: 100%;
   display: block;
+  border-radius: 50%;
 }
 
 .app-header h1 {
   font-family: var(--font-heading);
   font-size: 16px;
-  font-weight: 600;
-  color: var(--heading);
+  font-weight: 700;
+  color: #FFFFFF;
   letter-spacing: -0.01em;
 }
 
@@ -117,7 +124,7 @@ body {
 }
 
 .icon-btn {
-  background: rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.12);
   border: 1px solid rgba(255,255,255,0.15);
   border-radius: var(--radius-sm);
   width: 34px;
@@ -128,17 +135,16 @@ body {
   cursor: pointer;
   font-size: 15px;
   transition: background var(--transition), border-color var(--transition);
-  backdrop-filter: blur(2px);
 }
 
 .icon-btn:hover {
-  background: rgba(255,255,255,0.18);
-  border-color: var(--glass-border-accent);
+  background: rgba(255,255,255,0.22);
+  border-color: rgba(255,255,255,0.30);
 }
 
 .icon-btn.active {
-  background: rgba(123,44,191,0.30);
-  border-color: var(--purple);
+  background: rgba(255,255,255,0.28);
+  border-color: rgba(255,255,255,0.40);
 }
 
 /* ── Main view ─────────────────────────────────────────────── */
@@ -154,68 +160,66 @@ body {
   display: inline-flex;
   align-self: flex-start;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--blue);
-  background: rgba(58,134,255,0.12);
+  color: var(--badge-text);
+  background: var(--badge-bg);
   padding: 4px 12px;
   border-radius: 20px;
-  border: 1px solid rgba(58,134,255,0.25);
+  border: 1px solid var(--badge-border);
 }
 
 /* ── Form labels ───────────────────────────────────────────── */
 .field-label {
   display: block;
-  font-family: var(--font-body);
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--meta);
+  color: var(--text-muted);
   margin-bottom: 5px;
 }
 
 /* ── Textareas ─────────────────────────────────────────────── */
 textarea {
   width: 100%;
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
   padding: 10px 12px;
   font-family: var(--font-body);
   font-size: 13px;
   line-height: 1.55;
-  color: var(--heading);
-  background: rgba(21,21,26,0.70);
-  backdrop-filter: blur(2px);
+  color: var(--text-primary);
+  background: var(--bg-input);
   resize: vertical;
   transition: border-color var(--transition), box-shadow var(--transition);
   outline: none;
 }
 
 textarea:focus {
-  border-color: var(--glass-border-accent);
-  box-shadow: 0 0 0 3px rgba(58,134,255,0.15);
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(10,102,194,0.12);
 }
 
 textarea::placeholder {
-  color: var(--meta);
+  color: var(--text-muted);
 }
 
 /* ── Select dropdowns ──────────────────────────────────────── */
 select {
   width: 100%;
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
   padding: 9px 32px 9px 12px;
   font-family: var(--font-body);
   font-size: 13px;
-  color: var(--heading);
-  background: rgba(21,21,26,0.70);
+  color: var(--text-primary);
+  background-color: var(--bg-input);
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23ACAEBB' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23999' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 12px center;
   cursor: pointer;
@@ -224,13 +228,13 @@ select {
 }
 
 select:focus {
-  border-color: var(--glass-border-accent);
-  box-shadow: 0 0 0 3px rgba(58,134,255,0.15);
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(10,102,194,0.12);
 }
 
 select option {
-  background: #1e1c35;
-  color: var(--heading);
+  background: var(--option-bg);
+  color: var(--text-primary);
 }
 
 /* ── Controls grid (template + tone side by side) ──────────── */
@@ -268,7 +272,7 @@ select option {
   padding-bottom: 9px;
 }
 
-/* ── Generate button (glassmorphism) ───────────────────────── */
+/* ── Generate button ───────────────────────────────────────── */
 .generate-btn {
   width: 100%;
   padding: 13px 18px;
@@ -277,25 +281,20 @@ select option {
   font-family: var(--font-body);
   font-size: 14px;
   font-weight: 700;
-  color: var(--heading);
-  background: var(--gradient-brand), var(--glass);
-  backdrop-filter: var(--blur);
-  -webkit-backdrop-filter: var(--blur);
-  box-shadow: var(--glass-shadow-inset), var(--glass-shadow-purple);
-  outline: 3px solid var(--glass-border-accent);
-  outline-offset: -3px;
+  color: var(--btn-text);
+  background: var(--btn-bg);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  transition: opacity var(--transition), transform var(--transition), box-shadow var(--transition);
+  box-shadow: var(--btn-shadow);
+  transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
 }
 
 .generate-btn:hover:not(:disabled) {
-  opacity: 0.93;
   transform: translateY(-1px);
-  box-shadow: var(--glass-shadow-inset), 4px 4px 18px rgba(123,44,191,0.45);
+  box-shadow: var(--btn-hover-shadow);
 }
 
 .generate-btn:active:not(:disabled) {
@@ -303,7 +302,7 @@ select option {
 }
 
 .generate-btn:disabled {
-  opacity: 0.4;
+  opacity: 0.45;
   cursor: not-allowed;
 }
 
@@ -329,8 +328,8 @@ select option {
   gap: 8px;
   padding: 10px 12px;
   border-radius: var(--radius-sm);
-  background: rgba(253,56,1,0.10);
-  border: 1px solid rgba(253,56,1,0.30);
+  background: var(--error-bg);
+  border: 1px solid var(--error-border);
 }
 
 .error-box span {
@@ -347,11 +346,11 @@ select option {
 
 /* ── Output area ───────────────────────────────────────────── */
 .output-area {
-  background: rgba(21,21,26,0.60);
-  border: 1px solid rgba(255,255,255,0.15);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius);
   overflow: hidden;
-  backdrop-filter: blur(2px);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 
 .output-area .output-header {
@@ -359,8 +358,8 @@ select option {
   align-items: center;
   justify-content: space-between;
   padding: 10px 14px;
-  background: rgba(3,188,84,0.10);
-  border-bottom: 1px solid rgba(3,188,84,0.20);
+  background: var(--success-bg);
+  border-bottom: 1px solid var(--success-border);
 }
 
 .output-area .output-header span {
@@ -376,20 +375,18 @@ select option {
 
 .output-actions button {
   padding: 5px 12px;
-  border: 1px solid rgba(3,188,84,0.30);
+  border: 1px solid var(--success-border);
   border-radius: var(--radius-btn);
-  background: rgba(3,188,84,0.10);
+  background: var(--success-bg);
   font-family: var(--font-body);
   font-size: 11px;
   font-weight: 600;
   color: var(--success);
   cursor: pointer;
   transition: background var(--transition), border-color var(--transition);
-  backdrop-filter: blur(2px);
 }
 
 .output-actions button:hover {
-  background: rgba(3,188,84,0.20);
   border-color: var(--success);
 }
 
@@ -411,7 +408,7 @@ select option {
   box-shadow: none;
 }
 
-/* ── Settings panel & template manager ─────────────────────── */
+/* ── Panels (Settings & Template Manager) ──────────────────── */
 .panel {
   padding: 16px 18px 20px;
   display: flex;
@@ -428,16 +425,16 @@ select option {
 .panel-header h2 {
   font-family: var(--font-heading);
   font-size: 15px;
-  font-weight: 600;
-  color: var(--heading);
+  font-weight: 700;
+  color: var(--text-primary);
 }
 
 .panel-close {
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
   font-size: 18px;
   cursor: pointer;
-  color: var(--body);
+  color: var(--text-secondary);
   line-height: 1;
   padding: 4px 8px;
   border-radius: var(--radius-sm);
@@ -445,8 +442,7 @@ select option {
 }
 
 .panel-close:hover {
-  background: rgba(255,255,255,0.15);
-  border-color: rgba(255,255,255,0.25);
+  border-color: var(--border-focus);
 }
 
 .panel-section {
@@ -459,32 +455,32 @@ select option {
   font-family: var(--font-heading);
   font-size: 13px;
   font-weight: 600;
-  color: var(--body);
+  color: var(--text-secondary);
 }
 
 /* ── Input fields ──────────────────────────────────────────── */
 input[type="text"],
 input[type="password"] {
   width: 100%;
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
   padding: 9px 12px;
   font-family: var(--font-body);
   font-size: 13px;
-  color: var(--heading);
-  background: rgba(21,21,26,0.70);
+  color: var(--text-primary);
+  background: var(--bg-input);
   outline: none;
   transition: border-color var(--transition), box-shadow var(--transition);
 }
 
 input[type="text"]:focus,
 input[type="password"]:focus {
-  border-color: var(--glass-border-accent);
-  box-shadow: 0 0 0 3px rgba(58,134,255,0.15);
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(10,102,194,0.12);
 }
 
 input::placeholder {
-  color: var(--meta);
+  color: var(--text-muted);
 }
 
 /* ── Template list ─────────────────────────────────────────── */
@@ -499,14 +495,15 @@ input::placeholder {
   align-items: center;
   justify-content: space-between;
   padding: 10px 12px;
-  background: rgba(21,21,26,0.55);
-  border: 1px solid rgba(255,255,255,0.10);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
   transition: border-color var(--transition);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 
 .template-item:hover {
-  border-color: rgba(123,44,191,0.40);
+  border-color: var(--border-focus);
 }
 
 .template-item .tpl-info {
@@ -520,12 +517,12 @@ input::placeholder {
 .template-item .tpl-name {
   font-size: 13px;
   font-weight: 600;
-  color: var(--heading);
+  color: var(--text-primary);
 }
 
 .template-item .tpl-desc {
   font-size: 11px;
-  color: var(--meta);
+  color: var(--text-muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -548,7 +545,7 @@ input::placeholder {
 }
 
 .template-item .tpl-actions button:hover {
-  background: rgba(255,255,255,0.10);
+  background: var(--bg-surface);
 }
 
 /* ── Template edit form ────────────────────────────────────── */
@@ -557,9 +554,10 @@ input::placeholder {
   flex-direction: column;
   gap: 8px;
   padding: 12px;
-  background: rgba(58,134,255,0.06);
-  border: 1px solid rgba(58,134,255,0.20);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 
 .template-form .form-row {
@@ -574,50 +572,44 @@ input::placeholder {
   justify-content: flex-end;
 }
 
-/* ── Small buttons (glassmorphism) ─────────────────────────── */
+/* ── Small buttons ─────────────────────────────────────────── */
 .btn-sm {
   padding: 7px 16px;
-  border: 1px solid rgba(255,255,255,0.18);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-btn);
-  background: rgba(255,255,255,0.06);
-  backdrop-filter: blur(2px);
+  background: var(--bg-surface);
   font-family: var(--font-body);
   font-size: 12px;
   font-weight: 600;
-  color: var(--body);
+  color: var(--text-secondary);
   cursor: pointer;
-  transition: background var(--transition), border-color var(--transition), color var(--transition);
+  transition: background var(--transition), border-color var(--transition), color var(--transition), box-shadow var(--transition);
 }
 
 .btn-sm:hover {
-  background: rgba(255,255,255,0.12);
-  border-color: rgba(255,255,255,0.30);
-  color: var(--heading);
+  border-color: var(--border-focus);
+  color: var(--text-primary);
 }
 
 .btn-sm.primary {
-  background: var(--gradient-brand), var(--glass);
-  backdrop-filter: var(--blur);
-  color: var(--heading);
+  background: var(--btn-bg);
+  color: var(--btn-text);
   border: none;
-  outline: 2.5px solid var(--glass-border-accent);
-  outline-offset: -2.5px;
-  box-shadow: var(--glass-shadow-inset), var(--glass-shadow-purple);
+  box-shadow: var(--btn-shadow);
 }
 
 .btn-sm.primary:hover {
-  opacity: 0.9;
-  box-shadow: var(--glass-shadow-inset), 3px 3px 14px rgba(123,44,191,0.40);
+  box-shadow: var(--btn-hover-shadow);
 }
 
 .btn-sm.danger {
   color: var(--error);
-  border-color: rgba(253,56,1,0.25);
+  border-color: var(--error-border);
 }
 
 .btn-sm.danger:hover {
-  background: rgba(253,56,1,0.10);
-  border-color: rgba(253,56,1,0.45);
+  background: var(--error-bg);
+  border-color: var(--error);
 }
 
 /* ── Add template button ───────────────────────────────────── */
@@ -627,10 +619,10 @@ input::placeholder {
   justify-content: center;
   gap: 6px;
   padding: 10px;
-  border: 2px dashed rgba(255,255,255,0.15);
+  border: 2px dashed var(--border-color);
   border-radius: var(--radius-sm);
   background: transparent;
-  color: var(--meta);
+  color: var(--text-muted);
   font-family: var(--font-body);
   font-size: 12px;
   font-weight: 600;
@@ -639,24 +631,23 @@ input::placeholder {
 }
 
 .add-tpl-btn:hover {
-  border-color: var(--glass-border-accent);
-  color: var(--blue);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
-/* ── Save bar (settings) ───────────────────────────────────── */
+/* ── Save bar ──────────────────────────────────────────────── */
 .save-bar {
   padding-top: 4px;
   display: flex;
   justify-content: flex-end;
 }
 
-/* ── Scrollable container ──────────────────────────────────── */
+/* ── Scrollable ────────────────────────────────────────────── */
 .scrollable {
   max-height: 480px;
   overflow-y: auto;
 }
 
-/* Scrollbar styling for dark theme */
 .scrollable::-webkit-scrollbar {
   width: 5px;
 }
@@ -666,15 +657,17 @@ input::placeholder {
 }
 
 .scrollable::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.15);
+  background: var(--scrollbar-thumb);
   border-radius: 10px;
 }
 
 .scrollable::-webkit-scrollbar-thumb:hover {
-  background: rgba(255,255,255,0.25);
+  background: var(--scrollbar-hover);
 }
 
-/* ── Animations ────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════════════════════════ */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(4px); }
   to   { opacity: 1; transform: translateY(0); }

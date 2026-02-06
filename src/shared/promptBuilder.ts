@@ -9,12 +9,6 @@ import type { Platform, Tone, CommentTemplate } from './types';
 const PLATFORM_HINTS: Record<Platform, string> = {
   linkedin:
     'This is LinkedIn — use a professional tone, minimal emojis, and focus on insight-driven commentary.',
-  facebook:
-    'This is Facebook — use a conversational tone, moderate emojis are fine, and keep it friendly.',
-  instagram:
-    'This is Instagram — be casual, emoji-friendly, and write short engaging comments.',
-  unknown:
-    'The platform is unknown — write a balanced, generally appropriate social media comment.',
 };
 
 export interface PromptParams {

@@ -1,5 +1,5 @@
 /* ──────────────────────────────────────────────────────────────
-   Content Script — injected into LinkedIn / Facebook / Instagram
+   Content Script — injected into LinkedIn
 
    Features:
    1. ✦ Button injected into every comment bar
@@ -30,60 +30,36 @@ let activePanelHost: HTMLElement | null = null;
 //  Platform detection
 // ══════════════════════════════════════════════════════════════
 function detectPlatform(): Platform {
-  const h = location.hostname;
-  if (h.includes('linkedin.com'))  return 'linkedin';
-  if (h.includes('facebook.com') || h.includes('fb.com')) return 'facebook';
-  if (h.includes('instagram.com')) return 'instagram';
-  return 'unknown';
+  return 'linkedin';
 }
 
 // ══════════════════════════════════════════════════════════════
 //  Post-text extraction (walk up from a comment bar to the post)
 // ══════════════════════════════════════════════════════════════
 function extractPostText(commentBar: HTMLElement): string {
-  const platform = detectPlatform();
-
-  if (platform === 'linkedin') {
-    const post =
-      commentBar.closest('.feed-shared-update-v2') ??
-      commentBar.closest('[data-urn]') ??
-      commentBar.closest('.occludable-update');
-    if (post) {
-      const desc =
-        post.querySelector('.feed-shared-update-v2__description') ??
-        post.querySelector('.feed-shared-text') ??
-        post.querySelector('.update-components-text') ??
-        post.querySelector('[dir="ltr"] span[dir="ltr"]') ??
-        post.querySelector('.break-words');
-      if (desc) return (desc as HTMLElement).innerText.trim();
-    }
+  const post =
+    commentBar.closest('.feed-shared-update-v2') ??
+    commentBar.closest('[data-urn]') ??
+    commentBar.closest('.occludable-update');
+  if (post) {
+    const desc =
+      post.querySelector('.feed-shared-update-v2__description') ??
+      post.querySelector('.feed-shared-text') ??
+      post.querySelector('.update-components-text') ??
+      post.querySelector('[dir="ltr"] span[dir="ltr"]') ??
+      post.querySelector('.break-words');
+    if (desc) return (desc as HTMLElement).innerText.trim();
   }
 
-  if (platform === 'facebook') {
-    const post =
-      commentBar.closest('[role="article"]') ??
-      commentBar.closest('[data-ad-comet-preview]');
-    if (post) {
-      const txt =
-        post.querySelector('[data-ad-preview="message"]') ??
-        post.querySelector('[dir="auto"]');
-      if (txt) return (txt as HTMLElement).innerText.trim();
-    }
-  }
-
-  if (platform === 'instagram') {
-    const post = commentBar.closest('article');
-    if (post) {
-      const cap = post.querySelector('span[dir="auto"]') ?? post.querySelector('h1');
-      if (cap) return (cap as HTMLElement).innerText.trim();
-    }
-  }
-
-  // Fallback: grab the biggest text block above
+  // Fallback: walk up to find a container with meaningful text
   let el: HTMLElement | null = commentBar;
-  while (el) {
+  let attempts = 0;
+  while (el && attempts < 15) {
     el = el.parentElement;
-    if (el && el.innerText && el.innerText.length > 80) {
+    attempts++;
+    if (!el) break;
+
+    if (el.innerText && el.innerText.length > 80) {
       const paragraphs = el.querySelectorAll('p, span[dir], div[dir]');
       for (const p of paragraphs) {
         const t = (p as HTMLElement).innerText.trim();
@@ -98,28 +74,12 @@ function extractPostText(commentBar: HTMLElement): string {
 //  Comment-bar selectors per platform
 // ══════════════════════════════════════════════════════════════
 function getCommentBarSelectors(): string[] {
-  const platform = detectPlatform();
-  switch (platform) {
-    case 'linkedin':
-      return [
-        '.comments-comment-box',
-        '.comments-comment-texteditor',
-        'form.comments-comment-box__form',
-        '.comment-box',
-      ];
-    case 'facebook':
-      return [
-        'form[role="presentation"]',
-        'div[role="textbox"][contenteditable="true"][aria-label*="comment" i]',
-      ];
-    case 'instagram':
-      return [
-        'form[method="POST"]',
-        'textarea[aria-label*="comment" i]',
-      ];
-    default:
-      return [];
-  }
+  return [
+    '.comments-comment-box',
+    '.comments-comment-texteditor',
+    'form.comments-comment-box__form',
+    '.comment-box',
+  ];
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -631,7 +591,7 @@ function init(): void {
   const observer = new MutationObserver(() => scanAndInjectButtons());
   observer.observe(document.body, { childList: true, subtree: true });
 
-  console.log('[AI Comment Generator] Content script loaded on', detectPlatform());
+  console.log('[AI Comment Generator] Content script loaded on LinkedIn');
 }
 
 init();
@@ -647,8 +607,8 @@ function escHtml(s: string): string {
     .replace(/"/g, '&quot;');
 }
 
-function platformLabel(p: Platform): string {
-  return { linkedin: '🔗 LinkedIn', facebook: '📘 Facebook', instagram: '📸 Instagram', unknown: '🌐 Unknown' }[p];
+function platformLabel(_p: Platform): string {
+  return '🔗 LinkedIn';
 }
 
 // ══════════════════════════════════════════════════════════════

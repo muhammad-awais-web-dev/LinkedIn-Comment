@@ -1,17 +1,15 @@
 {
   "manifest_version": 3,
-  "name": "AI Comment Generator",
+  "name": "AI Comment Generator for LinkedIn",
   "version": "1.0.0",
-  "description": "Generate AI-powered comments for LinkedIn, Facebook & Instagram",
+  "description": "Generate AI-powered comments for LinkedIn posts",
   "permissions": [
     "activeTab",
     "storage",
     "scripting"
   ],
   "host_permissions": [
-    "https://www.linkedin.com/*",
-    "https://www.facebook.com/*",
-    "https://www.instagram.com/*"
+    "https://www.linkedin.com/*"
   ],
   "background": {
     "service_worker": "serviceWorker.js",
@@ -30,9 +28,7 @@
   "content_scripts": [
     {
       "matches": [
-        "https://www.linkedin.com/*",
-        "https://www.facebook.com/*",
-        "https://www.instagram.com/*"
+        "https://www.linkedin.com/*"
       ],
       "js": ["contentScript.js"],
       "run_at": "document_idle"

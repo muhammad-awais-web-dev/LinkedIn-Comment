@@ -3,7 +3,7 @@
    ────────────────────────────────────────────────────────────── */
 
 // ── Platforms ──────────────────────────────────────────────────
-export type Platform = 'linkedin' | 'facebook' | 'instagram' | 'unknown';
+export type Platform = 'linkedin';
 
 // ── Tones ─────────────────────────────────────────────────────
 export type Tone =
